@@ -29,7 +29,7 @@ public class PlayerMovement : MonoBehaviour
         character.Move(moveVector * characterSpeed * Time.fixedDeltaTime);
     }
 
-    public void OnMovementChanged(InputAction.CallbackContext context) {
+    private void OnMovementChanged(InputAction.CallbackContext context) {
         Vector2 direction = context.ReadValue<Vector2>();
         moveVector = new Vector3(direction.x,0,direction.y);
     }
