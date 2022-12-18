@@ -6,12 +6,22 @@ using UnityEngine.InputSystem;
 [RequireComponent(typeof(CharacterController))]
 public class PlayerMovement : MonoBehaviour
 {
+    [SerializeField] private InputActionAsset playerControls;
     [SerializeField] private float characterSpeed = 10f;
 
     private CharacterController character;
+    private InputAction movement;
+
     private Vector3 moveVector;
 
     private void Awake() {
+        var inGameActionMap = playerControls.FindActionMap("InGame");
+
+        movement = inGameActionMap.FindAction("Move");
+        movement.performed += OnMovementChanged;
+        movement.canceled += OnMovementChanged;
+        movement.Enable();
+
         character = GetComponent<CharacterController>();
     }
     
